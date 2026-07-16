@@ -1,0 +1,42 @@
+package com.ayush.waypoint.domain;
+
+import lombok.*;
+import org.springframework.data.annotation.CreateDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+
+
+@Entity
+@EntityListeners(value = AuditingEntityListener.class)      
+@SequenceGenerator(name = "seq", initialValue = 100000)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
+@EqualsAndHashCode(of = "id")
+@ToString
+public class ShortUrl {
+     
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
+    private Long id;
+
+    @CreateDate
+    @Column(nullable = false)
+    private LocalDateTime created;
+
+    @Column(length = 1000, unique = true, nullable = false)
+    private String url;
+
+    @Column(nullable = false)
+    private Long count = 0L;
+
+    public ShortUrl( String url){
+        this.url = url;
+    }
+
+    public void increaseCount() {
+        this.count++;
+    }
+}
