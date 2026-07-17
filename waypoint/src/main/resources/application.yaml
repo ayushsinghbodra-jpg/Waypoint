@@ -1,3 +1,21 @@
 spring:
-  application:
-    name: waypoint
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    data-password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    database: h2
+    hibernate:
+      ddl-auto: update
+    properties:
+      format_sql: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
+
+short-server:
+  base-url: http://localhost:8080/

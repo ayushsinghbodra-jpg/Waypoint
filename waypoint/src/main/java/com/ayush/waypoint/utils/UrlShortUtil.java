@@ -1,26 +1,36 @@
 package com.ayush.waypoint.utils;
 
-
 public final class UrlShortUtil {
     public static final String ALPHABET = "bcdfghjkmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ";
     public static final int BASE = ALPHABET.length();
 
     public static String encode(Long num) {
-        StringBuilder sb = new StringBuilder();
-        while(num>0){
-            sb.append(ALPHABET.charAt((int)(num%BASE)));
-            num=num/BASE;
+        if (num == null || num <= 0) {
+            return "";
         }
-        return sb.toString();
+
+        StringBuilder sb = new StringBuilder();
+        long value = num;
+        while (value > 0) {
+            int index = (int) (value % BASE);
+            sb.append(ALPHABET.charAt(index));
+            value = value / BASE;
+        }
+        return sb.reverse().toString();
     }
 
     public static Long decode(String str) {
-        Long num = 0L;
-        int power = 1;
+        if (str == null || str.isEmpty()) {
+            return 0L;
+        }
 
-        for(int i=0 i<str.length(); i++) {
-            num = num + ((Long)ALPHABET.indexof(str.charAt(i)))*power;
-            power= power*BASE;
+        long num = 0L;
+        for (int i = 0; i < str.length(); i++) {
+            int index = ALPHABET.indexOf(str.charAt(i));
+            if (index < 0) {
+                throw new IllegalArgumentException("Invalid short URL value: " + str);
+            }
+            num = num * BASE + index;
         }
 
         return num;

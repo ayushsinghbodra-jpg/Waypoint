@@ -1,4 +1,4 @@
-package com.ayush.waypoint.exeption;
+package com.ayush.waypoint.exception;
 
 public class NotFoundException extends RuntimeException {
     public NotFoundException(String message){

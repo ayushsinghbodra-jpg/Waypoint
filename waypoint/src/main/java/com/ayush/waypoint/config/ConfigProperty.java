@@ -3,17 +3,16 @@ package com.ayush.waypoint.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-
-@COnfiguration
-@COnfigurationProperties(prefix = "short-server")
-public class COnfigProperty {
+@Configuration
+@ConfigurationProperties(prefix = "short-server")
+public class ConfigProperty {
     private String baseUrl;
 
-    public Stirng getBaseUrl(){
+    public String getBaseUrl() {
         return baseUrl;
     }
 
-    public void setbaseUrl(string baseUrl) {
+    public void setBaseUrl(String baseUrl) {
         this.baseUrl = baseUrl;
     }
 }
