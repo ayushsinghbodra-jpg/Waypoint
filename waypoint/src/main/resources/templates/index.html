@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Waypoint - URL Shortener</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<main class="main">
+    <!-- Header -->
+    <header class="header">
+        <div class="container flex-between">
+            <div class="logo">
+                <a href="#">
+                    <img th:src="@{/images/waypoint-logo.svg}" alt="Waypoint Logo"/>
+                </a>
+            </div>
+            <nav class="main-navgation flex-between flex-ver-top">
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#resources">Resources</a>
+                </div>
+                <div class="nav-buttons">
+                    <a href="#" class="log-in">Login</a>
+                    <a href="#" class="sign-up btn btn-sm">Sign Up</a>
+                </div>
+            </nav>
+            <div class="burger-menu">
+                <i class="fa-regular fa-bars icon"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Landing -->
+    <section class="landing">
+        <div class="landing-text">
+            <h1>More than just shorter links</h1>
+            <p>
+                Build your brand's recognition and get detailed
+                insights on how your links are performing.
+            </p>
+            <a href="#url-shorten-form" class="btn btn-lg">Get Started</a>
+        </div>
+        <div class="landing-image">
+            <img src="https://raw.githubusercontent.com/MohamedAridah/frontendmentor_url-shortening-api/main/images/illustration-working.svg"
+                 alt="Working Illustration"/>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="container">
+            <!-- Short URL Feature -->
+            <div class="url-shorten-feature">
+                <form class="url-shorten-form" id="url-shorten-form">
+                    <div>
+                        <input type="text" class="url-input"
+                               placeholder="Shorten a link here..."
+                               autocomplete="off"/>
+                        <span class="alert"></span>
+                    </div>
+                    <button type="submit" class="btn btn-lg">
+                        Shorten It!
+                    </button>
+                </form>
+                <div class="url-shorten-results"></div>
+            </div>
+
+            <!-- Advanced Features -->
+            <div class="more-features">
+                <div class="section-header">
+                    <h2>Advanced Statistics</h2>
+                    <p>
+                        Track how your links are performing across
+                        the web with our advanced statistics dashboard.
+                    </p>
+                </div>
+                <div class="more-features-content">
+                    <div class="feature">
+                        <div class="feature-illustration">
+                            <img src="https://raw.githubusercontent.com/MohamedAridah/frontendmentor_url-shortening-api/main/images/icon-brand-recognition.svg"
+                                 alt="Brand Recognition"/>
+                        </div>
+                        <div class="feature-details">
+                            <h3>Brand Recognition</h3>
+                            <p>
+                                Boost your brand recognition with each click.
+                                Generic links don't mean a thing. Branded links
+                                help instil confidence in your content.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-illustration">
+                            <img src="https://raw.githubusercontent.com/MohamedAridah/frontendmentor_url-shortening-api/main/images/icon-detailed-records.svg"
+                                 alt="Detailed Records"/>
+                        </div>
+                        <div class="feature-details">
+                            <h3>Detailed Records</h3>
+                            <p>
+                                Gain insights into who is clicking your links.
+                                Knowing when and where people engage with your
+                                content helps inform better decisions.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-illustration">
+                            <img src="https://raw.githubusercontent.com/MohamedAridah/frontendmentor_url-shortening-api/main/images/icon-fully-customizable.svg"
+                                 alt="Fully Customizable"/>
+                        </div>
+                        <div class="feature-details">
+                            <h3>Fully Customizable</h3>
+                            <p>
+                                Improve brand awareness and content
+                                discoverability through customizable links,
+                                supercharging audience engagement.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Boost your links today</h2>
+                <a href="#" class="btn btn-lg">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="resources">
+        <div class="container">
+            <div class="logo">
+                <a href="#">
+                    <img src="https://raw.githubusercontent.com/MohamedAridah/frontendmentor_url-shortening-api/main/images/logo.svg"
+                         alt="Waypoint Logo"/>
+                </a>
+            </div>
+            <div class="quick-links">
+                <div class="links-group">
+                    <span>Features</span>
+                    <div>
+                        <a href="#">Link Shortening</a>
+                        <a href="#">Branded Links</a>
+                        <a href="#">Analytics</a>
+                    </div>
+                </div>
+                <div class="links-group">
+                    <span>Resources</span>
+                    <div>
+                        <a href="#">Blog</a>
+                        <a href="#">Developers</a>
+                        <a href="#">Support</a>
+                    </div>
+                </div>
+                <div class="links-group">
+                    <span>Company</span>
+                    <div>
+                        <a href="#">About</a>
+                        <a href="#">Our Team</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <div class="social-media">
+                <a href="#">
+                    <img src="https://raw.githubusercontent.com/MohamedAridah/frontendmentor_url-shortening-api/main/images/icon-facebook.svg"
+                         alt="Facebook"/>
+                </a>
+                <a href="#">
+                    <img src="https://raw.githubusercontent.com/MohamedAridah/frontendmentor_url-shortening-api/main/images/icon-twitter.svg"
+                         alt="Twitter"/>
+                </a>
+                <a href="#">
+                    <img src="https://raw.githubusercontent.com/MohamedAridah/frontendmentor_url-shortening-api/main/images/icon-pinterest.svg"
+                         alt="Pinterest"/>
+                </a>
+                <a href="#">
+                    <img src="https://raw.githubusercontent.com/MohamedAridah/frontendmentor_url-shortening-api/main/images/icon-instagram.svg"
+                         alt="Instagram"/>
+                </a>
+            </div>
+        </div>
+    </footer>
+</main>
+
+<script>
+    // Burger menu toggle
+    document.querySelector(".burger-menu").addEventListener("click", function () {
+        const nav = document.querySelector(".main-navgation");
+        nav.style.height = nav.style.height === "0px" || !nav.style.height
+            ? "300px"
+            : "0px";
+    });
+
+    // Form submission
+    document.querySelector("#url-shorten-form").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const form = document.querySelector(".url-shorten-form");
+        const input = document.querySelector(".url-input");
+        const alertBox = document.querySelector(".alert");
+        const results = document.querySelector(".url-shorten-results");
+        const url = input.value.trim();
+
+        // Clear previous errors
+        form.classList.remove("empty", "success");
+        alertBox.textContent = "";
+
+        // Validate empty
+        if (!url) {
+            form.classList.add("empty");
+            alertBox.textContent = "Please add a link";
+            return;
+        }
+
+        try {
+            const response = await fetch("/api/shorturl", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({url: url})
+            });
+
+            const data = await response.json();
+
+            if (data.success === true) {
+                form.classList.add("success");
+                input.value = "";
+
+                // Add result to list
+                const resultDiv = document.createElement("div");
+                resultDiv.className = "url-shorten-result";
+                resultDiv.innerHTML = `
+                    <div class="old-url">
+                        <p>${url}</p>
+                    </div>
+                    <div class="new-url">
+                        <a href="${data.response.url}" 
+                           target="_blank">
+                            ${data.response.url}
+                        </a>
+                        <div class="options">
+                            <button class="btn btn-sm copy-btn scale-effect"
+                                onclick="copyUrl(this, '${data.response.url}')">
+                                Copy
+                            </button>
+                        </div>
+                    </div>
+                `;
+                results.prepend(resultDiv);
+
+            } else {
+                form.classList.add("empty");
+                alertBox.textContent = data.error.message;
+            }
+
+        } catch (err) {
+            form.classList.add("empty");
+            alertBox.textContent = "Something went wrong. Try again.";
+        }
+    });
+
+    // Copy to clipboard
+    function copyUrl(btn, url) {
+        navigator.clipboard.writeText(url);
+        btn.textContent = "Copied!";
+        btn.classList.add("copied");
+
+        setTimeout(() => {
+            btn.textContent = "Copy";
+            btn.classList.remove("copied");
+        }, 2000);
+    }
+</script>
+</body>
+</html>
