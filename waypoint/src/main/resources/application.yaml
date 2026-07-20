@@ -1,21 +1,21 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    data-password:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/waypoint}
+    driver-class-name: org.postgresql.Driver
+    username: ${DB_USERNAME:ayush}
+    password: ${DB_PASSWORD:password}
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    database: h2
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
-    properties:
-      format_sql: true
+    open-in-view: false
 
-logging:
-  level:
-    org.hibernate.SQL: debug
-    org.hibernate.type: trace
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+  cache:
+    type: redis
 
 short-server:
-  base-url: http://localhost:8080/
+  base-url: ${BASE_URL:http://localhost:8080/}

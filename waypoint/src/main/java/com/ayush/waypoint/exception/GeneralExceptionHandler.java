@@ -40,6 +40,11 @@ public class GeneralExceptionHandler {
         return newResponse(e, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(org.springframework.web.servlet.resource.NoResourceFoundException.class)
+    public ResponseEntity<?> handleNoResourceFoundException(org.springframework.web.servlet.resource.NoResourceFoundException e) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler({
             IllegalArgumentException.class,
             IllegalStateException.class,

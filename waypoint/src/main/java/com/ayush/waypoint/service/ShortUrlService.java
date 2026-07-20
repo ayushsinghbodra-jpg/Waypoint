@@ -1,22 +1,24 @@
 package com.ayush.waypoint.service;
 
-import com.ayush.waypoint.config.ConfigProperty;
 import com.ayush.waypoint.domain.ShortUrl;
+import com.ayush.waypoint.exception.NotFoundException;
 import com.ayush.waypoint.repository.ShortUrlRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.Optional;
 
 @Service
 public class ShortUrlService {
 
-    private final ConfigProperty configProperty;
+    private static final Logger log = LoggerFactory.getLogger(ShortUrlService.class);
     private final ShortUrlRepository shortUrlRepository;
 
-    public ShortUrlService(ConfigProperty configProperty, ShortUrlRepository shortUrlRepository) {
-        this.configProperty = configProperty;
+    public ShortUrlService(ShortUrlRepository shortUrlRepository) {
         this.shortUrlRepository = shortUrlRepository;
     }
 
@@ -31,10 +33,33 @@ public class ShortUrlService {
         return shortUrlRepository.save(shortUrl);
     }
 
+    @Cacheable(value = "urls", key = "#id")
     @Transactional(readOnly = true)
     public String findById(Long id) {
+        log.info("Cache MISS — hitting DB for id: {}", id);
         ShortUrl shortUrl = shortUrlRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid short URL id: " + id));
+                .orElseThrow(() -> new NotFoundException("Invalid short URL id: " + id));
         return shortUrl.getUrl();
+    }
+
+    @CacheEvict(value = "urls", key = "#id")
+    @Transactional
+    public void deleteById(Long id) {
+        if (!shortUrlRepository.existsById(id)) {
+            throw new NotFoundException("Short URL not found with id: " + id);
+        }
+        shortUrlRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void increaseCount(Long id) {
+        shortUrlRepository.incrementCount(id);
+    }
+
+
+    @Transactional(readOnly = true)
+    public ShortUrl findShortUrlById(Long id) {
+        return shortUrlRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Invalid short URL id: " + id));
     }
 }

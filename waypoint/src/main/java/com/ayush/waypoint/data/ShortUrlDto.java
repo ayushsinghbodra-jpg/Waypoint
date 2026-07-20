@@ -24,15 +24,21 @@ public class ShortUrlDto {
 
     public static class Res {
         private final String url;
-        private final Long count;
 
-        public Res(Long count, String encode) {
-            this.url = encode;
-            this.count = count;
+        public Res( String encode) {
+            this.url = encode;   
         }
 
         public String getUrl() {
             return url;
+        }
+    }
+
+    public static class StatsRes {
+        private final Long count;
+
+        public StatsRes(Long count){
+            this.count = count;
         }
 
         public Long getCount() {
