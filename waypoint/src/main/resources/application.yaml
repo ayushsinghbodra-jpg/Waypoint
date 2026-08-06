@@ -19,3 +19,4 @@ spring:
 
 short-server:
   base-url: ${BASE_URL:http://localhost:8080/}
+  hash-id-salt : ${HASH_ID_SALT}

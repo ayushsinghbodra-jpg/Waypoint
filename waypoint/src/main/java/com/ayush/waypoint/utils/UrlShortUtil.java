@@ -1,38 +1,18 @@
 package com.ayush.waypoint.utils;
-
+import org.hashids.Hashids;
 public final class UrlShortUtil {
-    public static final String ALPHABET = "bcdfghjkmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ";
-    public static final int BASE = ALPHABET.length();
-
-    public static String encode(Long num) {
-        if (num == null || num <= 0) {
-            return "";
-        }
-
-        StringBuilder sb = new StringBuilder();
-        long value = num;
-        while (value > 0) {
-            int index = (int) (value % BASE);
-            sb.append(ALPHABET.charAt(index));
-            value = value / BASE;
-        }
-        return sb.reverse().toString();
+    private final Hashids hashids;
+    public UrlShortUtil(String salt) {
+        this.hashids = new Hashids(salt, 10);
     }
-
-    public static Long decode(String str) {
-        if (str == null || str.isEmpty()) {
-            return 0L;
+    public String encode(Long id){
+        return hashids.encode(id);
+    }
+    public Long decode(String shortUrl){
+        long[] decoded = hashids.decode(shortUrl);
+        if(decoded.length == 0){
+            throw new IllegalArgumentException("Invalid short url");
         }
-
-        long num = 0L;
-        for (int i = 0; i < str.length(); i++) {
-            int index = ALPHABET.indexOf(str.charAt(i));
-            if (index < 0) {
-                throw new IllegalArgumentException("Invalid short URL value: " + str);
-            }
-            num = num * BASE + index;
-        }
-
-        return num;
+        return decoded[0];
     }
 }

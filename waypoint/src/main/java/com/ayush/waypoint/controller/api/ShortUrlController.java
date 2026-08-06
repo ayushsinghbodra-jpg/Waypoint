@@ -23,13 +23,14 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/shorturl")
 public class ShortUrlController {
     private static final Logger log = LoggerFactory.getLogger(ShortUrlController.class);
-
+    private final UrlShortUtil urlShortUtil;
     private final ConfigProperty configProperty;
     private final ShortUrlService shortUrlService;
 
-    public ShortUrlController(ConfigProperty configProperty, ShortUrlService shortUrlService) {
+    public ShortUrlController(ConfigProperty configProperty, ShortUrlService shortUrlService, UrlShortUtil urlShortUtil) {
         this.configProperty = configProperty;
         this.shortUrlService = shortUrlService;
+        this.urlShortUtil = new UrlShortUtil(configProperty.getHashIdSalt());
     }
 
     @PostMapping("")
@@ -37,7 +38,7 @@ public class ShortUrlController {
         log.debug("req : {}", req);
 
         ShortUrl shortUrl = shortUrlService.findByOriginalUrl(req.getUrl());
-        String encodedUrl = configProperty.getBaseUrl() + "r/"+UrlShortUtil.encode(shortUrl.getId());
+        String encodedUrl = configProperty.getBaseUrl() + "r/"+urlShortUtil.encode(shortUrl.getId());
         return ApiUtils.success(new ShortUrlDto.Res(encodedUrl));
     }
 

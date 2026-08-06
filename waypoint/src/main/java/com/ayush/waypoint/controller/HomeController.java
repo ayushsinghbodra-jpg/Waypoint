@@ -16,9 +16,10 @@ import jakarta.servlet.http.HttpServletResponse;
 public class HomeController {
     private final ShortUrlService shortUrlService;
     private static final Logger log = LoggerFactory.getLogger(HomeController.class);
-
-    public HomeController(ShortUrlService shortUrlService) {
+    private final UrlShortUtil urlShortUtil;
+    public HomeController(ShortUrlService shortUrlService,UrlShortUtil urlShortUtil) {
         this.shortUrlService = shortUrlService;
+        this.urlShortUtil =  urlShortUtil;
     }
 
     @GetMapping("/r/{path}")
@@ -28,7 +29,7 @@ public class HomeController {
         response.setHeader("Expires", "0");
         
         try {
-            Long id = UrlShortUtil.decode(path);
+            Long id = urlShortUtil.decode(path);
             shortUrlService.increaseCount(id);
             String targetUrl = shortUrlService.findById(id);
             RedirectView redirectView = new RedirectView(targetUrl);

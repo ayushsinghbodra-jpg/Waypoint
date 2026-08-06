@@ -7,6 +7,11 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "short-server")
 public class ConfigProperty {
     private String baseUrl;
+    private String hashIdSalt;
+    
+    public String getHashIdSalt() {
+        return hashIdSalt;
+    }
 
     public String getBaseUrl() {
         return baseUrl;
@@ -14,5 +19,9 @@ public class ConfigProperty {
 
     public void setBaseUrl(String baseUrl) {
         this.baseUrl = baseUrl;
+    }
+
+    public void setHashIdSalt(String hashIdSalt) {
+        this.hashIdSalt = hashIdSalt;
     }
 }

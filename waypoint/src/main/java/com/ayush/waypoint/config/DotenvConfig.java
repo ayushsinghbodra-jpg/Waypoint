@@ -15,7 +15,6 @@ public class DotenvConfig {
                 .ignoreIfMissing()
                 .load();
         
-        // Set system properties so Spring Boot can read them
         dotenv.entries().forEach(entry -> {
             System.setProperty(entry.getKey(), entry.getValue());
         });
