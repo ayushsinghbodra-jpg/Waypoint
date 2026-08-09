@@ -8,11 +8,11 @@ public class ApiUtils {
         return new ApiResult<>(true,response,null);
     }
 
-    public static ApiResult<?> error(Throwable throwable, HttpStatus status){
+    public static <T> ApiResult<T> error(Throwable throwable, HttpStatus status){
         return new ApiResult<>(false,null,new ApiError(throwable,status));
     }
 
-    public static ApiResult<?> error(String message , HttpStatus status) {
+    public static <T> ApiResult<T> error(String message , HttpStatus status) {
         return new ApiResult<> (false , null , new ApiError(message,status));
     }
 

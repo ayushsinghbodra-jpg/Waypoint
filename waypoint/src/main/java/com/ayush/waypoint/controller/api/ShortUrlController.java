@@ -47,7 +47,7 @@ public class ShortUrlController {
         log.debug("code : {}", code);
 
         try {
-            Long id = UrlShortUtil.decode(code);
+            Long id = urlShortUtil.decode(code);
             ShortUrl shortUrl = shortUrlService.findShortUrlById(id);
             return ApiUtils.success(new ShortUrlDto.StatsRes(shortUrl.getCount()));
         } catch (IllegalArgumentException e) {

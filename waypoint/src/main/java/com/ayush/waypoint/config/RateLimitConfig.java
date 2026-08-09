@@ -4,16 +4,17 @@ import com.ayush.waypoint.filter.RateLimitFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 @Configuration
 public class RateLimitConfig {
+
     @Bean
-    public FilterRegistrationBean<RateLimitFilter> rateLimitFilterRegistration(RateLimitFilter rateLimitFilter) {
-        FilterRegistrationBean<RateLimitFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new RateLimitFilter());
-        registrationBean.addUrlPatterns("/api/shorturl/*");
-        registrationBean.setName("rateLimitFilter");
-        registrationBean.setOrder(1);
-        return registrationBean;
-    }
+    public FilterRegistrationBean<RateLimitFilter> rateLimitFilter() {
+        FilterRegistrationBean<RateLimitFilter> registration = new FilterRegistrationBean<>();
+        registration.setFilter(new RateLimitFilter());
+        registration.addUrlPatterns("/api/shorturl/*");
+        registration.setName("rateLimitFilter");
+        registration.setOrder(1);
+        return registration;
     }
 }

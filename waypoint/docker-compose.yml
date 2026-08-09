@@ -1,0 +1,61 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: waypoint-app
+    ports:
+      - "8080:8080"
+    environment:
+      # Matches your actual .env keys exactly. Only DB_URL and REDIS_HOST
+      # change from your local .env — they now point at the compose service
+      # names ("postgres", "redis") instead of localhost, since containers
+      # on the same compose network resolve each other by service name.
+      DB_URL: jdbc:postgresql://postgres:5432/waypoint
+      DB_USERNAME: ${DB_USERNAME:-ayush}
+      DB_PASSWORD: ${DB_PASSWORD:-password}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      BASE_URL: http://localhost:8080/
+      HASH_ID_SALT: ${HASH_ID_SALT}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: waypoint-postgres
+    environment:
+      POSTGRES_DB: waypoint
+      POSTGRES_USER: ${DB_USERNAME:-ayush}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
+    ports:
+      - "5432:5432"
+    volumes:
+      - waypoint-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-ayush} -d waypoint"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  redis:
+    image: redis:alpine
+    container_name: waypoint-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  waypoint-postgres-data:
